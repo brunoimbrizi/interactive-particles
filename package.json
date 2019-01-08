@@ -1,0 +1,51 @@
+{
+  "name": "webpack-threejs",
+  "version": "1.0.1",
+  "description": "A simple boilerplate to start projects with Three.js using webpack.",
+  "keywords": [
+    "three.js",
+    "webpack",
+    "glsl",
+    "glslify"
+  ],
+  "author": {
+    "name": "Bruno Imbrizi",
+    "url": "http://brunoimbrizi.com"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "scripts": {
+    "build": "webpack -p --config config/prod.js",
+    "start": "webpack-dev-server --config config/dev.js"
+  },
+  "dependencies": {
+    "@brunoimbrizi/controlkit": "^0.1.93",
+    "browser-detect": "^0.2.28",
+    "domready": "^1.0.8",
+    "glsl-noise": "0.0.0",
+    "stats.js": "^0.17.0",
+    "three": "^0.98.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.52",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0-rc.1",
+    "@babel/polyfill": "^7.0.0-beta.55",
+    "@babel/preset-env": "^7.0.0-beta.52",
+    "babel-loader": "^8.0.0-beta.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^0.28.11",
+    "file-loader": "^1.1.11",
+    "glslify": "^6.2.1",
+    "glslify-import-loader": "^0.1.2",
+    "glslify-loader": "^1.0.2",
+    "html-webpack-plugin": "^3.2.0",
+    "imports-loader": "^0.8.0",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.3"
+  }
+}
