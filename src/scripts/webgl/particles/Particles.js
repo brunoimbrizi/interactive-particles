@@ -39,9 +39,9 @@ export default class Particles {
 		let originalColors;
 
 		if (discard) {
-			// discard pixels darker than threshold
+			// discard pixels darker than threshold #22
 			numVisible = 0;
-			threshold = 10;
+			threshold = 34;
 
 			const img = this.texture.image;
 			const canvas = document.createElement('canvas');
@@ -79,6 +79,7 @@ export default class Particles {
 			depthTest: false,
 			transparent: true,
 			// wireframe: true,
+			// blending: THREE.AdditiveBlending
 		});
 
 		const geometry = new THREE.InstancedBufferGeometry();
@@ -128,7 +129,8 @@ export default class Particles {
 	}
 
 	initTouch() {
-		this.touch = new TouchTexture(this);
+		// create only once
+		if (!this.touch) this.touch = new TouchTexture(this);
 		this.object3D.material.uniforms.uTouch.value = this.touch.texture;
 	}
 
@@ -141,8 +143,6 @@ export default class Particles {
 	}
 
 	addListeners() {
-		if (!this.hitArea) return;
-
 		this.handlerInteractiveMove = this.onInteractiveMove.bind(this);
 
 		this.webgl.interactive.addListener('interactive-move', this.handlerInteractiveMove);
@@ -151,8 +151,6 @@ export default class Particles {
 	}
 
 	removeListeners() {
-		if (!this.hitArea) return;
-
 		this.webgl.interactive.removeListener('interactive-move', this.handlerInteractiveMove);
 		
 		const index = this.webgl.interactive.objects.findIndex(obj => obj === this.hitArea);
@@ -171,23 +169,26 @@ export default class Particles {
 		this.object3D.material.uniforms.uTime.value += delta;
 	}
 
-	show() {
+	show(time = 1.0) {
 		// reset
-		this.object3D.material.uniforms.uSize.value = 0.8;
-		this.object3D.material.uniforms.uRandom.value = 1.0;
+		TweenLite.to(this.object3D.material.uniforms.uSize, time, { value: 1.5 });
+		TweenLite.to(this.object3D.material.uniforms.uRandom, time, { value: 2.0 });
+		TweenLite.fromTo(this.object3D.material.uniforms.uDepth, time * 1.5, { value: 40.0 }, { value: 4.0 });
 
 		this.addListeners();
 	}
 
-	hide(_destroy, time = 1.0) {
-		if (!this.object3D) return;
-		
-		TweenLite.to(this.object3D.material.uniforms.uRandom, time, { value: 3.0 });
-		TweenLite.to(this.object3D.material.uniforms.uSize, time, { value: 0.0, onComplete: () => {
-			if (_destroy) this.destroy();
-		} });
+	hide(_destroy, time = 0.8) {
+		return new Promise((resolve, reject) => {
+			TweenLite.to(this.object3D.material.uniforms.uRandom, time, { value: 5.0, onComplete: () => {
+				if (_destroy) this.destroy();
+				resolve();
+			} });
+			TweenLite.to(this.object3D.material.uniforms.uDepth, time, { value: -20.0, ease: Quart.easeIn });
+			TweenLite.to(this.object3D.material.uniforms.uSize, time * 0.8, { value: 0.0 });
 
-		this.removeListeners();
+			this.removeListeners();
+		});
 	}
 
 	destroy() {

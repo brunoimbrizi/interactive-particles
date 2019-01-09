@@ -30,8 +30,8 @@ export default class App {
 		window.addEventListener('resize', this.resize.bind(this));
 		window.addEventListener('keyup', this.keyup.bind(this));
 		
-		// const el = this.webgl.renderer.domElement;
-		// el.addEventListener('click', this.onClick.bind(this));
+		const el = this.webgl.renderer.domElement;
+		el.addEventListener('click', this.click.bind(this));
 	}
 
 	animate() {
@@ -69,5 +69,9 @@ export default class App {
 		if (e.keyCode == 71) { if (this.gui) this.gui.toggle(); }
 		// r
 		if (e.keyCode == 82) { if (this.webgl.trackball) this.webgl.trackball.reset(); }
+	}
+
+	click(e) {
+		this.webgl.next();
 	}
 }

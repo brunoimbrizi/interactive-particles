@@ -9,9 +9,9 @@ export default class GUIView {
 		this.postProcessing = false;
 
 		this.particlesHitArea = false;
-		this.particlesRandom = 1;
-		this.particlesDepth = 2;
-		this.particlesSize = 0.8;
+		this.particlesRandom = 2;
+		this.particlesDepth = 4;
+		this.particlesSize = 1.5;
 
 		this.range = [0, 1];
 		this.rangeRandom = [0, 10];
@@ -21,7 +21,7 @@ export default class GUIView {
 		this.initControlKit();
 		this.initStats();
 
-		// this.disable();
+		this.disable();
 	}
 
 	initControlKit() {
