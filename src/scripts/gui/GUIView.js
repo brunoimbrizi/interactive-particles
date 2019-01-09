@@ -14,9 +14,9 @@ export default class GUIView {
 		this.particlesSize = 1.5;
 
 		this.range = [0, 1];
-		this.rangeRandom = [0, 10];
+		this.rangeRandom = [1, 10];
 		this.rangeSize = [0, 2];
-		this.rangeDepth = [0, 10];
+		this.rangeDepth = [1, 10];
 
 		this.initControlKit();
 		this.initStats();
@@ -27,10 +27,6 @@ export default class GUIView {
 	initControlKit() {
 		this.controlKit = new ControlKit();
 		this.controlKit.addPanel({ width: 300, enable: true })
-
-		// .addGroup({label: 'Post Processing', enable: true })
-		// .addSlider(this, 'postOpacity', 'range', { label: 'opacity', onChange: () => { this.onPostProcessingChange(); } })
-		// .addCheckbox(this, 'postProcessing', { label: 'post processing', onChange: () => { this.onPostProcessingChange(); } })
 
 		.addGroup({label: 'Particles', enable: true })
 		.addCanvas({ label: 'touch', height: 64 })

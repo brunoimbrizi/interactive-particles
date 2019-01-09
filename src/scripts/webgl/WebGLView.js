@@ -23,7 +23,8 @@ export default class WebGLView {
 		this.initParticles();
 		this.initControls();
 
-		this.goto(3);
+		const rnd = ~~(Math.random() * this.samples.length);
+		this.goto(rnd);
 	}
 
 	initThree() {
@@ -66,9 +67,9 @@ export default class WebGLView {
 
 
 	goto(index) {
-		// init immediately
+		// init next
 		if (this.currSample == null) this.particles.init(this.samples[index]);
-		// hide first then init
+		// hide curr then init next
 		else {
 			this.particles.hide(true).then(() => {
 				this.particles.init(this.samples[index]);

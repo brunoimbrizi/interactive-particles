@@ -85,23 +85,23 @@ export default class Particles {
 		const geometry = new THREE.InstancedBufferGeometry();
 
 		// positions
-		const positions = new THREE.BufferAttribute( new Float32Array( 4 * 3 ), 3 );
-		positions.setXYZ( 0,  -0.5, 0.5,  0.0 );
-		positions.setXYZ( 1,  0.5,  0.5,  0.0 );
-		positions.setXYZ( 2,  -0.5, -0.5, 0.0 );
-		positions.setXYZ( 3,  0.5,  -0.5, 0.0 );
-		geometry.addAttribute( 'position', positions );
+		const positions = new THREE.BufferAttribute(new Float32Array(4 * 3), 3);
+		positions.setXYZ(0, -0.5,  0.5,  0.0);
+		positions.setXYZ(1,  0.5,  0.5,  0.0);
+		positions.setXYZ(2, -0.5, -0.5,  0.0);
+		positions.setXYZ(3,  0.5, -0.5,  0.0);
+		geometry.addAttribute('position', positions);
 
 		// uvs
-		const uvs = new THREE.BufferAttribute( new Float32Array( 4 * 2 ), 2 );
-		uvs.setXYZ( 0,  0.0,  0.0 );
-		uvs.setXYZ( 1,  1.0,  0.0 );
-		uvs.setXYZ( 2,  0.0,  1.0 );
-		uvs.setXYZ( 3,  1.0,  1.0 );
-		geometry.addAttribute( 'uv', uvs );
+		const uvs = new THREE.BufferAttribute(new Float32Array(4 * 2), 2);
+		uvs.setXYZ(0,  0.0,  0.0);
+		uvs.setXYZ(1,  1.0,  0.0);
+		uvs.setXYZ(2,  0.0,  1.0);
+		uvs.setXYZ(3,  1.0,  1.0);
+		geometry.addAttribute('uv', uvs);
 
 		// index
-		geometry.setIndex( new THREE.BufferAttribute( new Uint16Array( [ 0, 2, 1, 2, 3, 1 ] ), 1 ) );
+		geometry.setIndex(new THREE.BufferAttribute(new Uint16Array([ 0, 2, 1, 2, 3, 1 ]), 1));
 
 		const indices = new Uint16Array(numVisible);
 		const offsets = new Float32Array(numVisible * 3);
@@ -171,7 +171,7 @@ export default class Particles {
 
 	show(time = 1.0) {
 		// reset
-		TweenLite.to(this.object3D.material.uniforms.uSize, time, { value: 1.5 });
+		TweenLite.fromTo(this.object3D.material.uniforms.uSize, time, { value: 0.5 }, { value: 1.5 });
 		TweenLite.to(this.object3D.material.uniforms.uRandom, time, { value: 2.0 });
 		TweenLite.fromTo(this.object3D.material.uniforms.uDepth, time * 1.5, { value: 40.0 }, { value: 4.0 });
 
@@ -184,7 +184,7 @@ export default class Particles {
 				if (_destroy) this.destroy();
 				resolve();
 			} });
-			TweenLite.to(this.object3D.material.uniforms.uDepth, time, { value: -20.0, ease: Quart.easeIn });
+			TweenLite.to(this.object3D.material.uniforms.uDepth, time, { value: -20.0, ease: Quad.easeIn });
 			TweenLite.to(this.object3D.material.uniforms.uSize, time * 0.8, { value: 0.0 });
 
 			this.removeListeners();

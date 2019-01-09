@@ -15,7 +15,7 @@ void main() {
 	// pixel color
 	vec4 colA = texture2D(uTexture, puv);
 
-	// grayscale
+	// greyscale
 	float grey = colA.r * 0.21 + colA.g * 0.71 + colA.b * 0.07;
 	vec4 colB = vec4(grey, grey, grey, 1.0);
 

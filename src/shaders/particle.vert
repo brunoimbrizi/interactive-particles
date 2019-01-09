@@ -47,20 +47,17 @@ void main() {
 	displaced.z += rndz * (random(pindex) * 2.0 * uDepth);
 	// center
 	displaced.xy -= uTextureSize * 0.5;
-	// scale
-	displaced.xy *= 1.0;
+
+	// touch
+	float t = texture2D(uTouch, puv).r;
+	displaced.z += t * 20.0 * rndz;
+	displaced.x += cos(angle) * t * 20.0 * rndz;
+	displaced.y += sin(angle) * t * 20.0 * rndz;
 
 	// particle size
 	float psize = (snoise_1_2(vec2(uTime, pindex) * 0.5) + 2.0);
 	psize *= max(grey, 0.2);
 	psize *= uSize;
-
-	// mouse
-	float t = texture2D(uTouch, puv).r;
-	displaced.z += t * 20.0 * rndz;
-	displaced.x += cos(angle) * t * 20.0 * rndz;
-	displaced.y += sin(angle) * t * 20.0 * rndz;
-	// psize *= 1.0 + t * 2.0;
 
 	// final position
 	vec4 mvPosition = modelViewMatrix * vec4(displaced, 1.0);
