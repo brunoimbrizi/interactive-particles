@@ -2,4 +2,5 @@ body {
 	background-color: #222;
 	margin: 0;
 	overflow: hidden;
+	cursor: pointer;
 }
