@@ -6,7 +6,8 @@ export default class TouchTexture {
 	constructor(parent) {
 		this.parent = parent;
 		this.size = 64;
-		this.maxAge = 100;
+		this.maxAge = 120;
+		this.radius = 0.15;
 		this.trail = [];
 
 		this.initTexture();
@@ -68,15 +69,15 @@ export default class TouchTexture {
 		};
 
 		let intensity = 1;
-		if (point.age < this.maxAge * 0.4) {
-			intensity = easeOutSine(point.age / (this.maxAge * 0.4), 0, 1, 1);
+		if (point.age < this.maxAge * 0.3) {
+			intensity = easeOutSine(point.age / (this.maxAge * 0.3), 0, 1, 1);
 		} else {
-			intensity = easeOutSine(1 - (point.age - this.maxAge * 0.4) / (this.maxAge * 0.6), 0, 1, 1);
+			intensity = easeOutSine(1 - (point.age - this.maxAge * 0.3) / (this.maxAge * 0.7), 0, 1, 1);
 		}
 
 		intensity *= point.force;
 
-		const radius = this.size * 0.15 * intensity;
+		const radius = this.size * this.radius * intensity;
 		const grd = this.ctx.createRadialGradient(pos.x, pos.y, radius * 0.25, pos.x, pos.y, radius);
 		grd.addColorStop(0, `rgba(255, 255, 255, 0.2)`);
 		grd.addColorStop(1, 'rgba(0, 0, 0, 0.0)');

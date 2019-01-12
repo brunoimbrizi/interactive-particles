@@ -6,37 +6,41 @@ export default class GUIView {
 	constructor(app) {
 		this.app = app;
 
-		this.postProcessing = false;
-
 		this.particlesHitArea = false;
 		this.particlesRandom = 2;
 		this.particlesDepth = 4;
 		this.particlesSize = 1.5;
+		
+		this.touchRadius = 0.15;
 
 		this.range = [0, 1];
 		this.rangeRandom = [1, 10];
-		this.rangeSize = [0, 2];
+		this.rangeSize = [0, 3];
 		this.rangeDepth = [1, 10];
+		this.rangeRadius = [0, 0.5];
 
 		this.initControlKit();
-		this.initStats();
+		// this.initStats();
 
-		this.disable();
+		// this.disable();
 	}
 
 	initControlKit() {
 		this.controlKit = new ControlKit();
-		this.controlKit.addPanel({ width: 300, enable: true })
+		this.controlKit.addPanel({ width: 300, enable: false })
 
+		.addGroup({label: 'Touch', enable: true })
+		.addCanvas({ label: 'trail', height: 64 })
+		.addSlider(this, 'touchRadius', 'rangeRadius', { label: 'radius', onChange: this.onTouchChange.bind(this) })
+		
 		.addGroup({label: 'Particles', enable: true })
-		.addCanvas({ label: 'touch', height: 64 })
-		.addCheckbox(this, 'particlesHitArea', { label: 'hit area', onChange: this.onParticlesChange.bind(this) })
+		// .addCheckbox(this, 'particlesHitArea', { label: 'hit area', onChange: this.onParticlesChange.bind(this) })
 		.addSlider(this, 'particlesRandom', 'rangeRandom', { label: 'random', onChange: this.onParticlesChange.bind(this) })
 		.addSlider(this, 'particlesDepth', 'rangeDepth', { label: 'depth', onChange: this.onParticlesChange.bind(this) })
 		.addSlider(this, 'particlesSize', 'rangeSize', { label: 'size', onChange: this.onParticlesChange.bind(this) })
 
 		// store reference to canvas
-		const component = this.controlKit.getComponentBy({ label: 'touch' });
+		const component = this.controlKit.getComponentBy({ label: 'trail' });
 		if (!component) return;
 
 		this.touchCanvas = component._canvas;
@@ -81,6 +85,13 @@ export default class GUIView {
 		else this.enable();
 	}
 
+	onTouchChange() {
+		if (!this.app.webgl) return;
+		if (!this.app.webgl.particles) return;
+
+		this.app.webgl.particles.touch.radius = this.touchRadius;
+	}
+	
 	onParticlesChange() {
 		if (!this.app.webgl) return;
 		if (!this.app.webgl.particles) return;

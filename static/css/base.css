@@ -140,9 +140,9 @@ a:focus {
 		pointer-events: none;
 		grid-template-columns: 75% 25%;
 		grid-template-rows: auto auto auto;
-		grid-template-areas: 'title links'
+		grid-template-areas: 'title demos'
 							'... ...'
-							'github demos';
+							'github links';
 	}
 	.frame__title-wrap {
 		grid-area: title;

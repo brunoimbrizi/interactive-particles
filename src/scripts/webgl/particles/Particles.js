@@ -78,7 +78,6 @@ export default class Particles {
 			fragmentShader: glslify(require('../../../shaders/particle.frag')),
 			depthTest: false,
 			transparent: true,
-			// wireframe: true,
 			// blending: THREE.AdditiveBlending
 		});
 
