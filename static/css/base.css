@@ -21,41 +21,6 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-/* Page Loader */
-.js .loading::before {
-	content: '';
-	position: fixed;
-	z-index: 100000;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: var(--color-bg);
-}
-
-.js .loading::after {
-	content: '';
-	position: fixed;
-	z-index: 100000;
-	top: 50%;
-	left: 50%;
-	width: 60px;
-	height: 60px;
-	margin: -30px 0 0 -30px;
-	pointer-events: none;
-	border-radius: 50%;
-	opacity: 0.4;
-	background: var(--color-link);
-	animation: loaderAnim 0.7s linear infinite alternate forwards;
-}
-
-@keyframes loaderAnim {
-	to {
-		opacity: 1;
-		transform: scale3d(0.5,0.5,1);
-	}
-}
-
 a {
 	text-decoration: none;
 	color: var(--color-link);
@@ -66,13 +31,6 @@ a:hover,
 a:focus {
 	color: var(--color-link-hover);
 	outline: none;
-}
-
-.message {
-	background: var(--color-text);
-	color: var(--color-bg);
-	padding: 1rem;
-	text-align: center;
 }
 
 .frame {
@@ -102,15 +60,6 @@ a:focus {
 	margin-right: 1rem;
 }
 
-.frame__demos {
-	margin: 1rem 0;
-}
-
-.frame__demo--current,
-.frame__demo--current:hover {
-	color: var(--color-text);
-}
-
 .content {
 	display: flex;
 	flex-direction: column;
@@ -122,9 +71,6 @@ a:focus {
 }
 
 @media screen and (min-width: 53em) {
-	.message {
-		display: none;
-	}
 	.frame {
 		position: fixed;
 		text-align: left;
@@ -140,9 +86,9 @@ a:focus {
 		pointer-events: none;
 		grid-template-columns: 75% 25%;
 		grid-template-rows: auto auto auto;
-		grid-template-areas: 'title demos'
+		grid-template-areas: 'title links'
 							'... ...'
-							'github links';
+							'github demos';
 	}
 	.frame__title-wrap {
 		grid-area: title;
@@ -161,11 +107,6 @@ a:focus {
 		grid-area: github;
 		justify-self: start;
 		margin: 0;
-	}
-	.frame__demos {
-		margin: 0;
-		grid-area: demos;
-		justify-self: end;
 	}
 	.frame__links {
 		grid-area: links;
