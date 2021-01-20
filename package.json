@@ -23,7 +23,7 @@
     "browser-detect": "^0.2.28",
     "domready": "^1.0.8",
     "glsl-noise": "0.0.0",
-    "gsap": "^2.0.2",
+    "gsap": "^3.6.0",
     "stats.js": "^0.17.0",
     "three": "^0.98.0"
   },
