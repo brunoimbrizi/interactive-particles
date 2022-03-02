@@ -30,7 +30,7 @@ export default class App {
 		window.addEventListener('resize', this.resize.bind(this));
 		window.addEventListener('keyup', this.keyup.bind(this));
 		
-		const el = this.webgl.renderer.domElement; 
+		const el = this.webgl.renderer.domElement; //this may be deprecated: incase of error try => this.webgl.render.domElement;
 		el.addEventListener('click', this.click.bind(this));
 	}
 
